@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIRE Movement - Early Retirement Simulator</title>
+    
+    <!-- External Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8478578534206436"
+     crossorigin="anonymous"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+        }
+        /* Tooltip styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 220px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -110px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.875rem;
+            font-weight: normal;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <!-- Embedded react-chartjs-2 library -->
+    <script>
+    !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports,require("react"),require("chart.js")):"function"==typeof define&&define.amd?define(["exports","react","chart.js"],e):e((t="undefined"!=typeof globalThis?globalThis:t||self).ReactChartJs2={},t.React,t.Chart)}("undefined"!=typeof globalThis?globalThis:window,function(t,e,r){"use strict";function n(t){return t&&"object"==typeof t&&"default"in t?t:{default:t}}var o=n(e);const a={type:"bar"},i={type:"bubble"},c={type:"doughnut"},s={type:"line"},l={type:"polarArea"},u={type:"pie"},p={type:"radar"},f={type:"scatter"};function d(t,e){const n=t.options||{};n.responsive=!0,n.maintainAspectRatio=!1;const a=(t,n)=>{e.current=n},i=o.default.useRef(null),c=o.default.useRef(e),s=o.default.useRef(t.data),l=JSON.stringify(s.current),u=o.default.useCallback(()=>{const t=i.current;t&&(s.current=JSON.parse(l),c.current=a,t.destroy())},[l]);return o.default.useEffect(()=>{u()},[u,l]),o.default.useImperativeHandle(e,()=>i.current||null),{ref:i,options:n,updater:a}}function h(t,e){const[n,a]=o.default.useState(),i=o.default.useRef(e),c=o.default.useRef(n),s=o.default.useCallback(t=>{const e=c.current;e&&(i.current=null,e.destroy())},[]);return o.default.useEffect(()=>{s()},[s]),o.default.useImperativeHandle(e,()=>({chart:c.current,update:i.current}),[]),o.default.useEffect(()=>{if(!n)return;const e=t.data.datasets.map(e=>({...e,backgroundColor:r.defaults.borderColor,borderColor:r.defaults.color}));i.current&&i.current("none"),r.Chart.getChart(n)||(c.current=new r.Chart(n,{...t,data:{...t.data,datasets:e}}))},[n,t]),o.default.useCallback(t=>{t&&a(t)},[])}function y(t){const{ref:n,options:a,updater:i}=d(t,t.forwardedRef),c=o.default.useRef(null),s=o.default.useRef(t.data);o.default.useEffect(()=>{if(!c.current)return;const e=t.plugins||[],n=r.Chart.getChart(c.current);n&&e.forEach(t=>{r.Chart.register(t)}),s.current=t.data,n?n.data=t.data:new r.Chart(c.current,{options:a,type:t.type,data:t.data,plugins:t.plugins})});const l=()=>{const e=c.current;e&&(r.Chart.getChart(e)?.destroy(),i(c,null))};return o.default.useEffect(()=>(l(),()=>{l()}),[]),o.default.createElement("canvas",{ref:c,role:"img",height:t.height,width:t.width,id:t.id,className:t.className,style:t.style})}function g(t,n){const a=o.default.forwardRef((a,i)=>o.default.createElement(y,{...a,forwardedRef:i,type:t,options:n}));return a.displayName=`Chart<${t}>`,a.defaults=n,a}const m=g("bar",a),b=g("bubble",i),v=g("doughnut",c),k=g("line",s),w=g("polarArea",l),C=g("pie",u),E=g("radar",p),S=g("scatter",f);function j(t,e){return"function"==typeof t?t(...e):t}function x(t,e,n){const{ref:a,options:i}=d(t,t.forwardedRef),c=o.default.useRef(null),s=o.default.useRef(t.data);let l=o.default.useRef(!1);const u=o.default.useCallback(()=>{if(!c.current)return;const e=r.Chart.getChart(c.current);s.current=t.data,e?Object.assign(e,t):new r.Chart(c.current,{options:i,...t})},[]);return o.default.useEffect(()=>{u()}),o.default.useEffect(()=>{l.current=!1,u()},[t.redraw]),o.default.createElement("canvas",{ref:c,role:"img",height:j(t.height,[c]),width:j(t.width,[c]),id:t.id,className:t.className,style:t.style})}r.Chart.register(r.ArcElement,r.LineElement,r.BarElement,r.PointElement,r.BarController,r.BubbleController,r.DoughnutController,r.LineController,r.PieController,r.PolarAreaController,r.RadarController,r.ScatterController,r.CategoryScale,r.LinearScale,r.LogarithmicScale,r.RadialLinearScale,r.TimeScale,r.TimeSeriesScale,r.Decimation,r.Filler,r.Legend,r.Title,r.Tooltip,r.SubTitle),t.Bar=m,t.Bubble=b,t.Chart=o.default.forwardRef((t,e)=>o.default.createElement(x,{...t,forwardedRef:e})),t.Doughnut=v,t.Line=k,t.Pie=C,t.PolarArea=w,t.Radar=E,t.Scatter=S,t.getDatasetAtEvent=function(t,e){return r.getDatasetAtEvent(t,e)},t.getElementAtEvent=function(t,e){return r.getElementAtEvent(t,e)},t.getElementsAtEvent=function(t,e){return r.getElementsAtEvent(t,e)},t.useChart=h,Object.defineProperty(t,"__esModule",{value:!0})});
+    </script>
+    
+    <script type="text/babel">
+        window.addEventListener('load', () => {
+            const { useState, useEffect, useMemo, useCallback, useRef } = React;
+            
+            const Tooltip = ({ text, children }) => (
+                <div className="tooltip ml-1.5 cursor-help">
+                    {children}
+                    <span className="tooltiptext">{text}</span>
+                </div>
+            );
+
+            // AdSense Component
+            const AdSenseAd = ({ adSlot }) => {
+                useEffect(() => {
+                    try {
+                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                    } catch (e) {
+                        console.error("AdSense error:", e);
+                    }
+                }, []);
+
+                return (
+                    <ins className="adsbygoogle"
+                        style={{ display: 'block' }}
+                        data-ad-client="ca-pub-8478578534206436" // Your publisher ID
+                        data-ad-slot={adSlot}
+                        data-ad-format="auto"
+                        data-full-width-responsive="true"></ins>
+                );
+            };
+
+            const App = () => {
+                const [currency, setCurrency] = useState({ code: 'GBP', symbol: '£' });
+                const [inputs, setInputs] = useState({
+                    currentAge: 30,
+                    currentSavings: 40000,
+                    monthlyInvestment: 1200,
+                    annualSpending: 30000,
+                    pensionLumpSum: 100000,
+                    monthlyPension: 0,
+                    pensionAge: 57,
+                });
+
+                const [result, setResult] = useState(null);
+                const [chartData, setChartData] = useState(null);
+                
+                const canvasRef = useRef(null);
+                const chartRef = useRef(null);
+                
+                const handleCurrencyChange = (e) => {
+                    const code = e.target.value;
+                    const symbols = { GBP: '£', USD: '$', EUR: '€' };
+                    setCurrency({ code, symbol: symbols[code] });
+                };
+
+                const handleInputChange = (e) => {
+                    const { name, value } = e.target;
+                    setInputs(prev => ({ ...prev, [name]: Number(value) }));
+                };
+                
+                const formatCurrency = useCallback((value) => {
+                    if (value === null || isNaN(value)) return `${currency.symbol}0`;
+                    return new Intl.NumberFormat('en-GB', { style: 'currency', currency: currency.code, minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
+                }, [currency]);
+
+                useEffect(() => {
+                    const { currentAge, currentSavings, monthlyInvestment, annualSpending, pensionLumpSum, monthlyPension, pensionAge } = inputs;
+                    const annualReturnRate = 0.07;
+                    const monthlyReturnRate = annualReturnRate / 12;
+
+                    let privatePortfolio = currentSavings;
+                    let pensionPortfolio = pensionLumpSum;
+                    let age = currentAge;
+                    let months = 0;
+                    
+                    const projectionData = [{ age, value: privatePortfolio + pensionPortfolio }];
+                    const maxYears = 100;
+                    const annualPensionIncome = monthlyPension * 12;
+
+                    while (age < currentAge + maxYears) {
+                        const currentAnnualSpending = age >= pensionAge ? annualSpending - annualPensionIncome : annualSpending;
+                        const fireTarget = Math.max(0, currentAnnualSpending) * 25;
+                        const totalPortfolio = age >= pensionAge ? privatePortfolio + pensionPortfolio : privatePortfolio;
+
+                        if (totalPortfolio >= fireTarget) {
+                            setResult({ fireTarget, retirementAge: age });
+                            setChartData({
+                                labels: projectionData.map(p => p.age),
+                                datasets: [
+                                    { label: `Projected Value (${currency.symbol})`, data: projectionData.map(p => p.value), borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, tension: 0.3 },
+                                    { label: `FIRE Target (${currency.symbol})`, data: Array(projectionData.length).fill(fireTarget), borderColor: '#16a34a', borderDash: [5, 5], fill: false, pointRadius: 0 },
+                                ],
+                            });
+                            return;
+                        }
+
+                        months++;
+                        privatePortfolio = (privatePortfolio + monthlyInvestment) * (1 + monthlyReturnRate);
+                        if (pensionLumpSum > 0) pensionPortfolio *= (1 + monthlyReturnRate);
+
+                        if (months % 12 === 0) {
+                            age++;
+                            const displayPortfolio = age >= pensionAge ? privatePortfolio + pensionPortfolio : privatePortfolio;
+                            projectionData.push({ age, value: Math.round(displayPortfolio) });
+                        }
+                    }
+                    
+                    setResult({ fireTarget: null, retirementAge: "Not Reachable" });
+                    setChartData(null); 
+                }, [inputs, currency]);
+
+                useEffect(() => {
+                    if (!chartData || !canvasRef.current) return;
+
+                    if (chartRef.current) {
+                        chartRef.current.destroy();
+                    }
+
+                    const chartOptions = {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: false,
+                        plugins: { 
+                            legend: { position: 'top' }, 
+                            tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label || ''}: ${formatCurrency(ctx.parsed.y)}` } } 
+                        },
+                        scales: { 
+                            y: { ticks: { callback: (val) => `${currency.symbol}${val / 1000}k` } }, 
+                            x: { title: { display: true, text: 'Age' } } 
+                        }
+                    };
+
+                    chartRef.current = new Chart(canvasRef.current, {
+                        type: 'line',
+                        data: chartData,
+                        options: chartOptions,
+                    });
+
+                }, [chartData, currency, formatCurrency]);
+
+
+                return (
+                    <div className="min-h-screen flex items-center justify-center p-4">
+                        <div className="w-full max-w-6xl mx-auto">
+                            <header className="text-center mb-8">
+                                <h1 className="text-4xl font-extrabold text-slate-800 tracking-tight">FIRE Movement Simulator</h1>
+                                <p className="text-slate-600 mt-2 max-w-2xl mx-auto">An advanced calculator to project your path to Financial Independence, Retire Early. Based on the 4% rule.</p>
+                            </header>
+                            <main className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                                <div className="lg:col-span-2 bg-white p-8 rounded-xl shadow-lg">
+                                    <div className="flex justify-between items-center mb-6">
+                                        <h2 className="text-2xl font-bold text-slate-700">Your Financials</h2>
+                                        <select onChange={handleCurrencyChange} value={currency.code} className="bg-slate-50 border border-slate-300 rounded-md shadow-sm p-2 text-sm">
+                                            <option value="GBP">GBP (£)</option>
+                                            <option value="USD">USD ($)</option>
+                                            <option value="EUR">EUR (€)</option>
+                                        </select>
+                                    </div>
+                                    <form onSubmit={(e) => e.preventDefault()}>
+                                        <div className="space-y-6">
+                                            <div>
+                                                <label htmlFor="currentAge" className="flex items-center text-sm font-medium text-slate-600">Current Age
+                                                    <Tooltip text="Your current age in years." />
+                                                </label>
+                                                <input type="number" name="currentAge" id="currentAge" value={inputs.currentAge} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"/>
+                                            </div>
+                                            <div>
+                                                <label htmlFor="currentSavings" className="flex items-center text-sm font-medium text-slate-600">Current Savings ({currency.symbol})
+                                                    <Tooltip text="The total amount you currently have in non-pension savings and investments (e.g., ISAs)." />
+                                                </label>
+                                                <input type="number" name="currentSavings" id="currentSavings" value={inputs.currentSavings} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"/>
+                                            </div>
+                                            <div>
+                                                <label htmlFor="monthlyInvestment" className="flex items-center text-sm font-medium text-slate-600">Monthly Investment ({currency.symbol})
+                                                    <Tooltip text="The amount you add to your non-pension savings and investments each month." />
+                                                </label>
+                                                <input type="number" name="monthlyInvestment" id="monthlyInvestment" value={inputs.monthlyInvestment} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"/>
+                                            </div>
+                                             <div>
+                                                <label htmlFor="annualSpending" className="flex items-center text-sm font-medium text-slate-600">Annual Spending in Retirement ({currency.symbol})
+                                                    <Tooltip text="Your estimated total expenses for one year in retirement. This determines your FIRE target." />
+                                                </label>
+                                                <input type="number" name="annualSpending" id="annualSpending" value={inputs.annualSpending} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"/>
+                                            </div>
+                                            <div className="pt-6 border-t">
+                                                 <h3 className="text-lg font-semibold text-slate-700 mb-4">Pensions</h3>
+                                                 <div className="space-y-6">
+                                                     <div>
+                                                        <label htmlFor="pensionLumpSum" className="flex items-center text-sm font-medium text-slate-600">Pension Pot Value ({currency.symbol})
+                                                            <Tooltip text="The current value of your defined contribution pension pots (e.g., SIPP). This will be added to your main savings at your pension age." />
+                                                        </label>
+                                                        <input type="number" name="pensionLumpSum" id="pensionLumpSum" value={inputs.pensionLumpSum} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"/>
+                                                     </div>
+                                                     <div>
+                                                        <label htmlFor="monthlyPension" className="flex items-center text-sm font-medium text-slate-600">Monthly Pension Income ({currency.symbol})
+                                                            <Tooltip text="The guaranteed monthly income you'll receive from defined benefit or state pensions. This reduces your spending need in retirement." />
+                                                        </label>
+                                                        <input type="number" name="monthlyPension" id="monthlyPension" value={inputs.monthlyPension} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"/>
+                                                     </div>
+                                                     <div>
+                                                        <label htmlFor="pensionAge" className="flex items-center text-sm font-medium text-slate-600">Pension Access Age
+                                                            <Tooltip text="The age you can start receiving your pension income and/or access your lump sum pot." />
+                                                        </label>
+                                                        <input type="number" name="pensionAge" id="pensionAge" value={inputs.pensionAge} onChange={handleInputChange} className="mt-1 block w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"/>
+                                                     </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div className="lg:col-span-3 bg-white p-8 rounded-xl shadow-lg">
+                                    <h2 className="text-2xl font-bold text-slate-700 mb-6">Your FIRE Projection</h2>
+                                    {result && (<div className="text-center mb-6"><p className="text-slate-600 text-lg">You can potentially retire at age:</p><p className="text-6xl font-extrabold text-blue-600 my-2">{result.retirementAge}</p><p className="text-slate-500">Your Financial Independence Number is <span className="font-semibold text-slate-700">{formatCurrency(result.fireTarget)}</span></p></div>)}
+                                    <div className="h-64 md:h-80">
+                                      {chartData ? <canvas ref={canvasRef} /> : <div className="flex items-center justify-center h-full text-slate-500">Projection not available.</div>}
+                                    </div>
+                                    <div className="mt-8 text-center bg-slate-50 p-4 rounded-lg">
+                                       <p className="text-sm text-slate-500">Advertisement</p>
+                                       <AdSenseAd adSlot="YOUR_AD_SLOT_ID_HERE" />
+                                    </div>
+                                </div>
+                            </main>
+                             <section className="mt-12 bg-white p-8 rounded-xl shadow-lg">
+                                <h2 className="text-2xl font-bold text-slate-700 mb-4">How It Works</h2>
+                                <div className="space-y-4 text-slate-600">
+                                    <p>This calculator is based on the core principles of the FIRE (Financial Independence, Retire Early) movement. It helps you project when you can achieve financial independence based on a few key inputs and assumptions.</p>
+                                    <div>
+                                        <h3 className="font-semibold text-slate-700">The Rule of 25 (Your FIRE Number)</h3>
+                                        <p>The first step is to calculate your "FIRE Number" – the total amount of investments you need to be considered financially independent. This calculator uses the <span className="font-bold">Rule of 25</span>, which states you need to have saved 25 times your estimated annual expenses in retirement. For example, if you plan to spend £30,000 per year, your FIRE number would be £750,000 (30,000 x 25).</p>
+                                    </div>
+                                    <div>
+                                        <h3 className="font-semibold text-slate-700">The 4% Safe Withdrawal Rate</h3>
+                                        <p>The Rule of 25 is the inverse of the <span className="font-bold">4% Rule</span>, a guideline which suggests that you can safely withdraw 4% of your initial investment portfolio each year (adjusting for inflation) without running out of money. This calculator assumes your portfolio will grow at an average rate of 7% per year, which accounts for the 4% withdrawal and an assumed 3% for inflation, allowing your principal to be preserved.</p>
+                                    </div>
+                                     <div>
+                                        <h3 className="font-semibold text-slate-700">Factoring in Pensions</h3>
+                                        <p className="mb-2">Pensions significantly impact your FIRE calculation. This tool accounts for them in two ways:</p>
+                                        <ul className="list-disc list-inside space-y-1">
+                                            <li><span className="font-semibold">Monthly Pension Income:</span> Any guaranteed income from defined benefit or state pensions reduces the amount of money your personal investments need to generate. We subtract your annual pension income from your annual spending <span className="italic">after</span> you reach pension age, which lowers your final FIRE target.</li>
+                                            <li><span className="font-semibold">Pension Pot Value:</span> The value of your defined contribution pensions (like a SIPP) is grown separately and added to your main portfolio when you reach your specified pension access age. This provides a significant boost to your investments, accelerating your path to FIRE.</li>
+                                        </ul>
+                                    </div>
+                                    <p className="text-xs text-slate-500 pt-4 border-t"><span className="font-semibold">Disclaimer:</span> This calculator is a simplified tool for informational purposes only. It assumes a fixed 7% annual return and does not account for taxes, market volatility, or changes in investment strategy. The results are projections, not guarantees. Consult a financial advisor for personalized advice.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                );
+            };
+
+            const container = document.getElementById('root');
+            const root = ReactDOM.createRoot(container);
+            root.render(<App />);
+        });
+    </script>
+</body>
+</html>
